@@ -61,6 +61,9 @@ h2{
 }
 </style>
 
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#e50914">
+
 </head>
 <body>
 
@@ -111,6 +114,12 @@ fetch("series.json")
 });
 
 </script>
+
+    <script>
+if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+}
+    </script>
 
 </body>
 </html>

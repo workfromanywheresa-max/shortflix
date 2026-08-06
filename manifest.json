@@ -7,12 +7,12 @@
   "theme_color": "#e50914",
   "icons": [
     {
-      "src": "applogo192.jpg",
+      "src": "https://shortflix.workfromanywhere-sa.workers.dev/images/applogo192.jpg",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "applogo512.jpg",
+      "src": "https://shortflix.workfromanywhere-sa.workers.dev/images/applogo512.jpg",
       "sizes": "512x512",
       "type": "image/png"
     }

@@ -44,6 +44,24 @@ header span{
     font-weight:normal;
     color:#fff;
     }
+
+    .header-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+#installBtn{
+    display:none;
+    background:#fff;
+    color:#e50914;
+    border:none;
+    padding:8px 12px;
+    border-radius:6px;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
     
 .grid{
     display:grid;
@@ -89,9 +107,18 @@ header span{
 <body>
 
 <header>
-    <img src="images/applogo192.jpg" alt="ShortFlix Logo" class="logo">
-    <span>ShortFlix</span>
+
+    <div class="header-top">
+        <div>
+            <img src="images/applogo192.jpg" alt="ShortFlix Logo" class="logo">
+            <span>ShortFlix</span>
+        </div>
+
+        <button id="installBtn">Install</button>
+    </div>
+
     <p>Watch the best short series for free anytime, anywhere.</p>
+
 </header>
 
 <div class="grid" id="grid"></div>
@@ -123,6 +150,35 @@ grid.innerHTML += `
 if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("sw.js");
 }
+    </script>
+
+    <script>
+let deferredPrompt;
+const installBtn = document.getElementById("installBtn");
+
+window.addEventListener("beforeinstallprompt", (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    installBtn.style.display = "block";
+});
+
+installBtn.addEventListener("click", async () => {
+    if (!deferredPrompt) return;
+
+    deferredPrompt.prompt();
+
+    const { outcome } = await deferredPrompt.userChoice;
+
+    if (outcome === "accepted") {
+        installBtn.style.display = "none";
+    }
+
+    deferredPrompt = null;
+});
+
+window.addEventListener("appinstalled", () => {
+    installBtn.style.display = "none";
+});
     </script>
 
 </body>

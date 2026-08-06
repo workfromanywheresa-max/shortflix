@@ -1,0 +1,17 @@
+[
+  {
+    "id":"hunters",
+    "title":"Hunters",
+    "poster":"huters.jpg",
+    "episodes":[
+      {
+        "title":"Episode 1",
+        "url":"https://your-mega-link-1"
+      },
+      {
+        "title":"Episode 2",
+        "url":"https://your-mega-link-2"
+      }
+    ]
+  }
+]

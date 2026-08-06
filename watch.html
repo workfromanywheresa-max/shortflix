@@ -54,45 +54,31 @@ h2{
 
 <script>
 
-const id=new URLSearchParams(location.search).get("id");
+const id = new URLSearchParams(location.search).get("id");
 
 fetch("series.json")
-.then(r=>r.json())
-.then(data=>{
+.then(r => r.json())
+.then(data => {
 
-const series=data.find(x=>x.id===id);
+    const series = data.find(x => x.id === id);
 
-document.getElementById("title").textContent=series.title;
+    document.getElementById("title").textContent = series.title;
 
-const list=document.getElementById("episodes");
+    const list = document.getElementById("episodes");
 
-series.episodes.forEach(ep=>{
+    series.episodes.forEach(ep => {
 
-list.innerHTML+=`
-<div class="episode"
-onclick="play('${ep.url}')">
+        list.innerHTML += `
+        <div class="episode"
+        onclick="window.location.href='${ep.url}'">
+            ${ep.title}
+        </div>
+        `;
 
-${ep.title}
-
-</div>
-`;
-
-});
+    });
 
 });
 
-function play(url){
-
-document.getElementById("player").src=url;
-document.getElementById("player").style.display="block";
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
 </script>
-
 </body>
 </html>

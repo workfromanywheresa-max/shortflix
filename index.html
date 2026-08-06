@@ -79,12 +79,12 @@ const grid=document.getElementById("grid");
 
 data.forEach(series=>{
 
-grid.innerHTML+=`
-<div class="card"
-onclick="location='watch.html?id=${series.id}'">
+grid.innerHTML += `
+<div class="card" onclick="location='watch.html?id=${series.id}'">
 
-<img src="images/${series.thumbnail}">
-<h3>${series.title}</h3>
+    <img src="images/${series.thumbnail}">
+    <h3>${series.title}</h3>
+    <p>${series.description}</p>
 
 </div>
 `;

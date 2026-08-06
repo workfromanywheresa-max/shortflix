@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ShortFlix</title>
+
+<style>
+body{
+    margin:0;
+    background:#111;
+    color:#fff;
+    font-family:Arial,sans-serif;
+}
+
+header{
+    background:#e50914;
+    padding:15px;
+    text-align:center;
+    font-size:26px;
+    font-weight:bold;
+}
+
+h2{
+    padding:15px;
+}
+
+#player{
+    width:100%;
+    height:220px;
+    border:none;
+    display:none;
+}
+
+.episode{
+    background:#222;
+    margin:10px 15px;
+    padding:15px;
+    border-radius:8px;
+    cursor:pointer;
+}
+</style>
+
+</head>
+<body>
+
+<header>🎬 ShortFlix</header>
+
+<h2 id="title"></h2>
+
+<iframe id="player" allowfullscreen></iframe>
+
+<div id="episodes"></div>
+
+<script>
+
+const id=new URLSearchParams(location.search).get("id");
+
+fetch("series.json")
+.then(r=>r.json())
+.then(data=>{
+
+const series=data.find(x=>x.id===id);
+
+document.getElementById("title").textContent=series.title;
+
+const list=document.getElementById("episodes");
+
+series.episodes.forEach(ep=>{
+
+list.innerHTML+=`
+<div class="episode"
+onclick="play('${ep.url}')">
+
+${ep.title}
+
+</div>
+`;
+
+});
+
+});
+
+function play(url){
+
+document.getElementById("player").src=url;
+document.getElementById("player").style.display="block";
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+</script>
+
+</body>
+</html>

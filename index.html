@@ -156,24 +156,28 @@ if ("serviceWorker" in navigator) {
 let deferredPrompt;
 const installBtn = document.getElementById("installBtn");
 
+// Always show the button
+installBtn.style.display = "block";
+
 window.addEventListener("beforeinstallprompt", (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    installBtn.style.display = "block";
 });
 
 installBtn.addEventListener("click", async () => {
-    if (!deferredPrompt) return;
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
 
-    deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
 
-    const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") {
+            installBtn.style.display = "none";
+        }
 
-    if (outcome === "accepted") {
-        installBtn.style.display = "none";
+        deferredPrompt = null;
+    } else {
+        alert("Install is not available yet. Please open this site in Chrome and use the browser's 'Add to Home screen' option if no prompt appears.");
     }
-
-    deferredPrompt = null;
 });
 
 window.addEventListener("appinstalled", () => {
